@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall
 DEPS = ../include
-SRC = ../src/*            #../src/
+SRC = ../src/*
 OBJ = tests.o
 
 %.o: %.c
