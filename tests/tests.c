@@ -4,12 +4,17 @@ void test_if_true(void){
     cipuada_assert_true((42 == 12));
 }
 
+
 void test_if_equal(void) {
     cipuada_assert_equal(2,3);
 }
 
-void test_if_false(void){
+void test_if_false(void) {
     cipuada_assert_false(false);
+}
+
+void test_if_false2(void) {
+    cipuada_assert_false((4 == 2*2))
 }
 
 void test_assert(void) {
@@ -26,8 +31,10 @@ int main(void) {
     test_if_true();
     // Expected to fail
     test_if_equal();
-    // Expect to work
+    // Expected to work
     test_if_false();
+    // Expected to fail
+    test_if_false2();
     // Expected to fail
     test_assert();
     // Expected to work
