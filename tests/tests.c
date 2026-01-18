@@ -25,6 +25,10 @@ void test_assert2(void) {
     cipuada_assert(2>-1);
 }
 
+void test_assert_match(void) {
+    cipuada_assert_match("a[[:alnum:]]+c", "xbc");
+}
+
 // run the tests
 int main(void) {
     // Expected to fail
@@ -39,5 +43,8 @@ int main(void) {
     test_assert();
     // Expected to work
     test_assert2();
+
+    // Tests a output with regex
+    test_assert_match();
     return 0;
 }

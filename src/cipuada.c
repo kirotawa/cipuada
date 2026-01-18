@@ -17,6 +17,7 @@ ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEAL
 */
 
 #include <stdio.h>
+#include <regex.h>
 #include <cipuada.h>
 
 void __cipuada_assert(const char *msg, const char *file, const char* func, int line)
@@ -32,4 +33,41 @@ void __cipuada_assert_equal_print(const char *ex1, const char *ex2, const char *
 void __cipuada_success_print(const char *func)
 {
 	fprintf(stdout, "%s finished OK\n", func);
+}
+
+void __cipuada_failed(const char *msg, const char*file, const char* func, int line) {
+	fprintf(stderr,"%s in line %d in file %s -- %s -- FAILED\n", func, line, file, msg);
+}
+
+void __cipuada_regex_match_failed(const char*pattern, const char* target_str, const char*file, const char* func, int line)
+{
+	const char* no_match_msg = "No match found!";
+	char buff[200];
+
+	snprintf(buff, sizeof(buff), "%s for pattern %s and target %s", no_match_msg, pattern, target_str);
+
+	__cipuada_failed(buff, file, func, line);
+}
+
+bool __cipuada_assert_match(const char* pattern, const char* target_str)
+{
+
+	regex_t regex;
+	int ret = 0;
+
+	ret = regcomp(&regex, pattern, REG_EXTENDED);
+	if (ret) {
+		fprintf(stderr, "Could not compile regex\n");
+		return false;
+	}
+
+	ret = regexec(&regex, target_str, 0, NULL, 0);
+
+	if (!ret) {
+		return true;
+	} else if (ret == REG_NOMATCH) {
+		return false;
+	} else {
+		return false; // some error that should be handle by regerror had occurred.
+	}
 }
