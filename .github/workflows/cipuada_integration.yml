@@ -9,20 +9,16 @@ on:
 
   jobs:
     test:
-      runs-on: ${{ matrix.os }}
-      strategy:
-        matrix:
-          os: [ubuntu-latest]
-          compiler: [gcc]
+      runs-on: ubuntu-latest
 
       steps:
         - name: Check source
           uses: actions/checkout@v3
 
-        - name: Setup env
+        - name: Install deps
           run: |
             sudo apt-get update
-            sudo apt-get install gcc
+            sudo apt-get install -y build-essential makegcc
 
         - name: Build library and run tests
           run: |
