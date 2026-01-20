@@ -51,7 +51,6 @@ void __cipuada_regex_match_failed(const char*pattern, const char* target_str, co
 
 bool __cipuada_assert_match(const char* pattern, const char* target_str)
 {
-
 	regex_t regex;
 	int ret = 0;
 

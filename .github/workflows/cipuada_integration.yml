@@ -1,0 +1,32 @@
+name: CI/CD Pipeline for CIPUADA
+
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main]
+
+  jobs:
+    test:
+      runs-on: ${{ matrix.os }}
+      strategy:
+        matrix:
+          os: [ubuntu-latest]
+          compiler: [gcc]
+
+      steps:
+        - name: Check source
+          uses: actions/checkout@v3
+
+        - name: Setup env
+          run: |
+            sudo apt-get update
+            sudo apt-get install gcc
+
+        - name: Build library and run tests
+          run: |
+            make clean
+            make run_tests
+
+
