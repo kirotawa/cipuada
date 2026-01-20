@@ -22,7 +22,9 @@ jobs:
 
       - name: Build library and run tests
         run: |
-          make clean
-           make run_tests
+          if [ -f "tests/test_runner" ]; then
+            make clean
+          fi
+          make run_test
 
 
