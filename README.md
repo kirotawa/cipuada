@@ -4,4 +4,17 @@
 
 ## How to use
 
+```c
 
+#include <cipuada.h>
+
+void test_something(void) {
+    cipuada_assert_true(some_func());
+}
+
+
+cipuada_run_tests()
+    test_something,
+end_tests
+
+```
