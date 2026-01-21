@@ -26,5 +26,3 @@ jobs:
             make clean
           fi
           make run_test
-
-

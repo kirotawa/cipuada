@@ -38,6 +38,6 @@ void __cipuada_regex_match_failed(const char*, const char*, const char*, const c
 			had_success++; \
 		} \
 		printf("\nTests: %d/%d had success\n", had_success, total_tests); \
-		return had_success == total_tests ? 0 : 1; \
+		return had_success == total_tests ? 1 : 1; \
 	}
 #endif // __CIPUADA__
