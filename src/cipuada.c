@@ -20,9 +20,12 @@ ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEAL
 #include <regex.h>
 #include <cipuada.h>
 
-void __cipuada_assert(const char *msg, const char *file, const char* func, int line)
+// Test function signature
+typedef void (*cipuada_test)(void);
+
+void __cipuada_failed_print(const char *msg, const char *file, const char* func, int line)
 {
-	fprintf(stderr, "%s in line %d in file %s with expression %s FAILED\n", func, line, file, msg);
+	fprintf(stderr, "%s in line %d in file %s after evaluate: %s - FAILED\n", func, line, file, msg);
 }
 
 void __cipuada_assert_equal_print(const char *ex1, const char *ex2, const char *file, const char *func, int line)
@@ -35,10 +38,6 @@ void __cipuada_success_print(const char *func)
 	fprintf(stdout, "%s finished OK\n", func);
 }
 
-void __cipuada_failed(const char *msg, const char*file, const char* func, int line) {
-	fprintf(stderr,"%s in line %d in file %s -- %s -- FAILED\n", func, line, file, msg);
-}
-
 void __cipuada_regex_match_failed(const char*pattern, const char* target_str, const char*file, const char* func, int line)
 {
 	const char* no_match_msg = "No match found!";
@@ -46,7 +45,7 @@ void __cipuada_regex_match_failed(const char*pattern, const char* target_str, co
 
 	snprintf(buff, sizeof(buff), "%s for pattern %s and target %s", no_match_msg, pattern, target_str);
 
-	__cipuada_failed(buff, file, func, line);
+	__cipuada_failed_print(buff, file, func, line);
 }
 
 bool __cipuada_assert_match(const char* pattern, const char* target_str)

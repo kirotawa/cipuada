@@ -4,7 +4,6 @@ void test_if_true(void){
     cipuada_assert_true((42 == 12));
 }
 
-
 void test_if_equal(void) {
     cipuada_assert_equal(2,3);
 }
@@ -29,22 +28,22 @@ void test_assert_match(void) {
     cipuada_assert_match("a[[:alnum:]]+c", "xbc");
 }
 
-// run the tests
-int main(void) {
+// run all tests
+cipuada_run_tests()
     // Expected to fail
-    test_if_true();
+    test_if_true,
     // Expected to fail
-    test_if_equal();
+    test_if_equal,
     // Expected to work
-    test_if_false();
+    test_if_false,
     // Expected to fail
-    test_if_false2();
+    test_if_false2,
     // Expected to fail
-    test_assert();
+    test_assert,
     // Expected to work
-    test_assert2();
+    test_assert2,
 
     // Tests a output with regex
-    test_assert_match();
-    return 0;
-}
+    test_assert_match,
+end_tests
+
