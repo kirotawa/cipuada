@@ -20,12 +20,16 @@ ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEAL
 #include <regex.h>
 #include <cipuada.h>
 
+// if true: success else fail
+bool success_or_fail = true;
+
 // Test function signature
 typedef void (*cipuada_test)(void);
 
 void __cipuada_failed_print(const char *msg, const char *file, const char* func, int line)
 {
 	fprintf(stderr, "%s in line %d in file %s after evaluate: %s - FAILED\n", func, line, file, msg);
+	success_or_fail = false;
 }
 
 void __cipuada_assert_equal_print(const char *ex1, const char *ex2, const char *file, const char *func, int line)

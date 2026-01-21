@@ -1,11 +1,15 @@
 #include <cipuada.h>
 
 void test_if_true(void){
-    cipuada_assert_true((42 == 12));
+    cipuada_assert_true((42 == 42));
 }
 
 void test_if_equal(void) {
-    cipuada_assert_equal(2,3);
+    cipuada_assert_equal(2,2);
+}
+
+void test_if_nequal(void) {
+    cipuada_assert_nequal(2,3);
 }
 
 void test_if_false(void) {
@@ -13,11 +17,11 @@ void test_if_false(void) {
 }
 
 void test_if_false2(void) {
-    cipuada_assert_false((4 == 2*2))
+    cipuada_assert_false((4 == 2*3))
 }
 
 void test_assert(void) {
-    cipuada_assert(2>5);
+    cipuada_assert(7>5);
 }
 
 void test_assert2(void) {
@@ -25,25 +29,18 @@ void test_assert2(void) {
 }
 
 void test_assert_match(void) {
-    cipuada_assert_match("a[[:alnum:]]+c", "xbc");
+    cipuada_assert_match("a[[:alnum:]]+c", "abc");
 }
 
 // run all tests
 cipuada_run_tests()
-    // Expected to fail
     test_if_true,
-    // Expected to fail
     test_if_equal,
-    // Expected to work
+    test_if_nequal,
     test_if_false,
-    // Expected to fail
     test_if_false2,
-    // Expected to fail
     test_assert,
-    // Expected to work
     test_assert2,
-
-    // Tests a output with regex
     test_assert_match,
 end_tests
 
